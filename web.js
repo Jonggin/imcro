@@ -3,7 +3,7 @@ const session = require('express-session');
 const app = express();
 const bodyParser = require('body-parser');
 const xlsx = require('xlsx'); 
-const EXCEL_FILE_PATH = 'Laptop.xlsx';
+const EXCEL_FILE_PATH = __dirname + '/Laptop.xlsx';
 
 const workbook = xlsx.readFile(EXCEL_FILE_PATH);
 const sheetName = workbook.SheetNames[0];
@@ -369,6 +369,6 @@ app.get('/finalresult', (req, res) => { //아직 안씀
 
 // 서버 시작
 app.listen(8001, () => {
-  console.log('Server is running on port 3000');
+  console.log('Server is running on port 8001');
 });
 
