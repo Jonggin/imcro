@@ -20,8 +20,8 @@ app.set('view engine', 'ejs');
 // views 디렉토리에 있는 파일을 뷰로 사용
 app.set('views', __dirname + '/views');
 
-// 정적 파일 제공을 위한 디렉토리 설정
-app.use(express.static('public'));
+// // 정적 파일 제공을 위한 디렉토리 설정
+// app.use(express.static('public'));
 
 // 세션 설정
 app.use(session({
