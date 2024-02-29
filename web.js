@@ -9,7 +9,7 @@ const workbook = xlsx.readFile(EXCEL_FILE_PATH);
 const sheetName = workbook.SheetNames[0];
 const sheet = workbook.Sheets[sheetName];
 const data = xlsx.utils.sheet_to_json(sheet);
-console.log(data)
+// console.log(data)
 
 app.use(bodyParser.json()); // JSON 형식의 데이터를 처리
 app.use(bodyParser.urlencoded({ extended: true })); // URL-encoded 형식의 데이터를 처리
