@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>노트북 추천 서비스 질문 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="fabicon.ico" type="image/x-icon">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+   @media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  body {
+    text-align: left; /* 텍스트를 좌측 정렬 */
+    margin: 0 15px; /* 좌우 마진 조정 */
+    font-size: 16px; /* 모바일 화면에 적합한 글자 크기 조정 */
+    line-height: 1.5; /* 줄 간격을 조정하여 가독성 향상 */
+  }
+  p {
+    margin: 0 10px; /* 문단 주변의 여백 조정 */
+    word-wrap: break-word; /* 긴 단어가 있을 경우 줄바꿈 */
+  }
+  .container {
+    padding: 0 2%; /* 컨테이너와 콘텐츠의 패딩 조정 */
+  }
+  .content {
+    padding: 0 10px; /* 콘텐츠의 패딩 조정 */
+  }
+  label {
+    font-size: 15px;
+  }
+}
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 60px;
+  }
+
+  .navbar {
+    background-color: #2A1AE4;
+    padding: 10px;
+    color: white;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .container {
+    display: flex;
+    padding: 20px;
+  }
+
+  .sidebar {
+    flex-basis: 230px;
+    flex-shrink: 0;
+    padding-right: 20px;
+  }
+
+  .sidebar button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    background-color: #ddd;
+    cursor: default;
+    box-sizing: border-box;
+    transition: background-color 0.3s; /* Smooth transition for background color */
+  }
+
+  .sidebar button.active {
+    background-color: #2A1AE4;
+    color: white;
+  }
+
+  .content {
+    flex-grow: 1;
+    padding-left: 40px; /* Increased padding to move content to the right */
+  }
+
+  .content h2 {
+    color: rgb(10, 8, 40, 0.7);
+    
+  }
+
+  .option {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    display: flex;
+  }
+
+  .option label {
+    display: block;
+    margin-bottom: 5px;
+    margin-right: 15px;
+  }
+
+  .option input[type="checkbox"] {
+    margin-right: 10px;
+  }
+
+  .navigation {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 0 20px;
+  }
+
+  .navigation button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #ddd;
+    color: black;
+    cursor: pointer;
+    margin-left: 30px;
+    transition: background-color 0.3s; /* Smooth transition for background color */
+  }
+
+  .navigation button:hover {
+    background-color: #2A1AE4;
+    color: white;
+  }
+  .arrow-down {
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #ddd; /* 화살표 색상 */
+  margin: 0 auto; /* 화살표를 중앙 정렬 */
+  margin-bottom: 10px; /* 버튼과의 거리 조정 */
+}
+</style>
+</head>
+<body>
+
+<div class="navbar" style="margin-bottom: 60px;">
+  URCom | 쉽게 사는 노트북
+</div>
+
+<div class="container">
+  <div class="sidebar" style="margin-top: 30px;">
+    <button id="weight">무게</button>
+    <div class="arrow-down"></div>
+    <button id="purpose">사용 목적</button>
+    <div class="arrow-down"></div>
+    <button id="game" class="active">게이밍</button>
+    <div class="arrow-down"></div>
+    <button id="feature">주요 특징</button>
+    <div class="arrow-down"></div>
+    <button id="OS">OS</button>
+    <div class="arrow-down"></div>
+    <button id="size">화면 크기</button>
+    <div class="arrow-down"></div>
+    <button id="price">가격</button>
+  </div>
+  <div class="content" id="form3">
+    <h2 style="margin-bottom: 5%;">3. 어떤 게임을 얼마나 하는지 평가해주세요. (항목 당 택 1)</h2>
+    <lable style="font-size: 18px; font-weight: bold;">롤</lable>
+    <div class="option">
+      <label><input type="checkbox" name="롤" value=0>안함</label><label><input type="checkbox" name="롤" value=1>가끔 함</label><label><input type="checkbox" name="롤" value=2>자주 함</label>
+    </div>
+    <lable style="font-size: 18px; font-weight: bold;">FC온라인</lable>
+    <div class="option">
+      <label><input type="checkbox" name="FC온라인" value=0>안함</label><label><input type="checkbox" name="FC온라인" value=1>가끔 함</label><label><input type="checkbox" name="FC온라인" value=2>자주 함</label>
+    </div>
+    <lable style="font-size: 18px; font-weight: bold;">발로란트</lable>
+    <div class="option">
+      <label><input type="checkbox" name="발로란트" value=0>안함</label><label><input type="checkbox" name="발로란트" value=1>가끔 함</label><label><input type="checkbox" name="발로란트" value=2>자주 함</label>
+    </div>
+    <lable style="font-size: 18px; font-weight: bold;">서든어택</lable>
+    <div class="option">
+      <label><input type="checkbox" name="서든어택" value=0>안함</label><label><input type="checkbox" name="서든어택" value=1>가끔 함</label><label><input type="checkbox" name="서든어택" value=2>자주 함</label>
+    </div>
+    <lable style="font-size: 18px; font-weight: bold;">배틀그라운드</lable>
+    <div class="option">
+      <label><input type="checkbox" name="배틀그라운드" value=0>안함</label><label><input type="checkbox" name="배틀그라운드" value=1>가끔 함</label><label><input type="checkbox" name="배틀그라운드" value=2>자주 함</label>
+    </div>
+    <lable style="font-size: 18px; font-weight: bold;">로스트아크</lable>
+    <div class="option">
+      <label><input type="checkbox" name="로스트아크" value=0>안함</label><label><input type="checkbox" name="로스트아크" value=1>가끔 함</label><label><input type="checkbox" name="로스트아크" value=2>자주 함</label>
+    </div>
+    <lable style="font-size: 18px; font-weight: bold;">오버워치</lable>
+    <div class="option">
+      <label><input type="checkbox" name="오버워치" value=0>안함</label><label><input type="checkbox" name="오버워치" value=1>가끔 함</label><label><input type="checkbox" name="오버워치" value=2>자주 함</label>
+    </div>
+    <lable style="font-size: 18px; font-weight: bold;">메이플</lable>
+    <div class="option">
+      <label><input type="checkbox" name="메이플" value=0>안함</label><label><input type="checkbox" name="메이플" value=1>가끔 함</label><label><input type="checkbox" name="메이플" value=2>자주 함</label>
+    </div>
+    <lable style="font-size: 18px; font-weight: bold;">스타크래프트</lable>
+    <div class="option">
+      <label><input type="checkbox" name="스타크래프트" value=0>안함</label><label><input type="checkbox" name="스타크래프트" value=1>가끔 함</label><label><input type="checkbox" name="스타크래프트" value=2>자주 함</label>
+    </div>
+    <lable style="font-size: 18px; font-weight: bold;">던파</lable>
+    <div class="option">
+      <label><input type="checkbox" name="던파" value=0>안함</label><label><input type="checkbox" name="던파" value=1>가끔 함</label><label><input type="checkbox" name="던파" value=2>자주 함</label>
+    </div>
+    <lable style="font-size: 18px; font-weight: bold;">팔월드</lable>
+    <div class="option">
+      <label><input type="checkbox" name="팔월드" value=0>안함</label><label><input type="checkbox" name="팔월드" value=1>가끔 함</label><label><input type="checkbox" name="팔월드" value=2>자주 함</label>
+    </div>
+  </div>
+</div>
+<div class="navigation">
+  <button id="previous">이전</button>
+  <button id="next">다음</button>
+</div>
+<script>
+ $(document).ready(function() {
+  $('input[type="checkbox"]').on('change', function() {
+  $('input[name="' + this.name + '"]').not(this).prop('checked', false);
+});
+    $('#next').click(function(e) { // 'e' 파라미터 추가
+        // 선택된 체크박스의 개수 계산
+        var checkedCount = $('input[type="checkbox"]:checked').length;
+        
+        // 선택된 체크박스가 없을 경우
+        if(checkedCount === 0) {
+            e.preventDefault(); // 이벤트 전파 중단
+            alert('최소 1개의 옵션을 선택하세요. \n 게임을 안한다면 게임 안함을 선택하세요.'); // 경고 메시지 표시
+        } else {
+            // 최소 1개의 옵션이 선택되었다면, 선택된 옵션 수집
+            var selectedlol = $('input[name="롤"]:checked').val();
+            var selectedfconline = $('input[name="FC온라인"]:checked').val();
+            var selectedbalo = $('input[name="발로란트"]:checked').val();
+            var selectedsudden = $('input[name="서든어택"]:checked').val();
+            var selectedbattle = $('input[name="배틀그라운드"]:checked').val();
+            var selectedlost = $('input[name="로스트아크"]:checked').val();
+            var selectedover = $('input[name="오버워치"]:checked').val();
+            var selectedmaple = $('input[name="메이플"]:checked').val();
+            var selectedstar = $('input[name="스타크래프트"]:checked').val();
+            var selecteddunpa = $('input[name="던파"]:checked').val();
+            var selectedpalworld = $('input[name="팔월드"]:checked').val();
+
+            // AJAX 호출
+            $.ajax({
+                url: '/game',
+                type: 'POST',
+                data: {
+                  lol: selectedlol,
+                  fc:selectedfconline,
+                  bal:selectedbalo,
+                  sudden:selectedsudden,
+                  battle:selectedbattle,
+                  lost:selectedlost,
+                  over:selectedover,
+                  maple:selectedmaple,
+                  star:selectedstar,
+                  dunpa:selecteddunpa,
+                  palworld:selectedpalworld
+                },
+                success: function(response) {
+                    // 서버로부터 응답이 성공적으로 오면, form4.ejs로 페이지 이동 
+                    window.location.href = 'form4.ejs';
+                },
+                error: function(xhr, status, error) {
+                    // 오류 처리
+                    alert("에러 발생: " + error);
+                }
+            });
+        }
+    });
+});
+document.getElementById('previous').addEventListener('click', function() {
+  window.history.back();
+});
+
+  // document.querySelector('#previous').addEventListener('click', function() {
+  //   // 여기에 설문조사 화면으로 이동하는 코드를 작성하세요.
+  //   window.location.href = 'form2.ejs'; // 'your-survey-page.ejs'를 설문조사 페이지의 URL로 교체하세요.
+  // });
+  // document.querySelector('#weight').addEventListener('click', function() {
+  //   // 여기에 설문조사 화면으로 이동하는 코드를 작성하세요.
+  //   window.location.href = 'form1.ejs'; // 'your-survey-page.ejs'를 설문조사 페이지의 URL로 교체하세요.
+  // });
+  // document.querySelector('#purpose').addEventListener('click', function() {
+  //   // 여기에 설문조사 화면으로 이동하는 코드를 작성하세요.
+  //   window.location.href = 'form2.ejs'; // 'your-survey-page.ejs'를 설문조사 페이지의 URL로 교체하세요.
+  // });
+  // document.querySelector('#feature').addEventListener('click', function() {
+  //   // 여기에 설문조사 화면으로 이동하는 코드를 작성하세요.
+  //   window.location.href = 'form4.ejs'; // 'your-survey-page.ejs'를 설문조사 페이지의 URL로 교체하세요.
+  // });
+  // document.querySelector('#OS').addEventListener('click', function() {
+  //   // 여기에 설문조사 화면으로 이동하는 코드를 작성하세요.
+  //   window.location.href = 'form5.ejs'; // 'your-survey-page.ejs'를 설문조사 페이지의 URL로 교체하세요.
+  // });
+  // document.querySelector('#size').addEventListener('click', function() {
+  //   // 여기에 설문조사 화면으로 이동하는 코드를 작성하세요.
+  //   window.location.href = 'form6.ejs'; // 'your-survey-page.ejs'를 설문조사 페이지의 URL로 교체하세요.
+  // });
+  // document.querySelector('#price').addEventListener('click', function() {
+  //   // 여기에 설문조사 화면으로 이동하는 코드를 작성하세요.
+  //   window.location.href = 'form7.ejs'; // 'your-survey-page.ejs'를 설문조사 페이지의 URL로 교체하세요.
+  // });
+  </script>
+
+
+</body>
+</html>

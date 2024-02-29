@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>노트북 추천 서비스 질문 4</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="fabicon.ico" type="image/x-icon">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+  @media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+}
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 60px;
+  }
+
+  .navbar {
+    background-color: #2A1AE4;
+    padding: 10px;
+    color: white;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .container {
+    display: flex;
+    padding: 20px;
+  }
+
+  .sidebar {
+    flex-basis: 230px;
+    flex-shrink: 0;
+    padding-right: 20px;
+  }
+
+  .sidebar button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    background-color: #ddd;
+    cursor: default;
+    box-sizing: border-box;
+    transition: background-color 0.3s; /* Smooth transition for background color */
+  }
+
+  .sidebar button.active {
+    background-color: #2A1AE4;
+    color: white;
+  }
+
+  .content {
+    flex-grow: 1;
+    padding-left: 40px; /* Increased padding to move content to the right */
+  }
+
+  .content h2 {
+    color: rgb(10, 8, 40, 0.7);
+    
+  }
+
+  .option {
+    margin-bottom: 15px;
+  }
+
+  .option label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .option input[type="checkbox"] {
+    margin-right: 10px;
+  }
+
+  .navigation {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 0 20px;
+  }
+
+  .navigation button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #ddd;
+    color: black;
+    cursor: pointer;
+    margin-left: 30px;
+    transition: background-color 0.3s; /* Smooth transition for background color */
+  }
+
+  .navigation button:hover {
+    background-color: #2A1AE4;
+    color: white;
+  }
+  .arrow-down {
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #ddd; /* 화살표 색상 */
+  margin: 0 auto; /* 화살표를 중앙 정렬 */
+  margin-bottom: 10px; /* 버튼과의 거리 조정 */
+}
+</style>
+</head>
+<body>
+
+<div class="navbar" style="margin-bottom: 60px;">
+  URCom | 쉽게 사는 노트북
+</div>
+
+<div class="container">
+  <div class="sidebar" style="margin-top: 30px;">
+    <button id="weight">무게</button>
+    <div class="arrow-down"></div>
+    <button id="purpose">사용 목적</button>
+    <div class="arrow-down"></div>
+    <button id="game">게이밍</button>
+    <div class="arrow-down"></div>
+    <button id="feature" class="active">주요 특징</button>
+    <div class="arrow-down"></div>
+    <button id="OS">OS</button>
+    <div class="arrow-down"></div>
+    <button id="size">화면 크기</button>
+    <div class="arrow-down"></div>
+    <button id="price">가격</button>
+  </div>
+  <div class="content">
+    <h2>4. 노트북에서 가장 필요한 특징은? (최대 2개 선택 가능)</h2>
+    <div class="option">
+      <label><input type="checkbox" name="feature" value="긴 배터리"> 대용량 배터리</label>
+    </div>
+    <div class="option">
+      <label><input type="checkbox" name="feature" value="많은 IO 포트"> 5개 이상의 IO 포트</label>
+    </div>
+    <div class="option">
+      <label><input type="checkbox" name="feature" value="최고급 화질"> 최고급 화질</label>
+    </div>
+    <div class="option">
+        <label><input type="checkbox" name="feature" value="최고급 음질"> 최고급 음질</label>
+    </div>
+    <div class="option">
+        <label><input type="checkbox" name="feature" value="터치스크린 지원"> 터치스크린 지원</label>
+    </div>
+    <div class="option">
+        <label><input type="checkbox" name="feature" value="가성비"> 가성비</label>
+    </div>
+    <div class="option">
+        <label><input type="checkbox" name="feature" value="usb-c pd 충전"> usb-c 타입 고속충전</label>
+    </div>
+    <div class="option">
+        <label><input type="checkbox" name="feature" value="디바이스 연동성"> 다른 기기와의 연동성</label>
+    </div>
+    <div class="option">
+        <label><input type="checkbox" name="feature" value="편리한 AS"> 편리한 AS</label>
+    </div>
+    <div class="option">
+        <label><input type="checkbox" name="feature" value="생체 인식"> 생체 인식 (지문, 얼굴 등)</label>
+    </div>
+  </div>
+</div>
+
+<div class="navigation">
+  <button id="previous">이전</button>
+  <button id="next">다음</button>
+</div>
+<script>
+  // JavaScript 코드가 필요하다면 여기에 작성하면 됩니다.
+  $(document).ready(function() {
+    // $('input[type="checkbox"][name="feature"]').change(function() {
+    // // 현재 체크된 체크박스 개수가 2개 이상일 경우, 가장 최근에 선택된 체크박스만 선택 상태로 유지
+    // if ($('input[type="checkbox"][name="feature"]:checked').length > 2) {
+    //   // 모든 체크박스의 선택을 해제
+    //   $('input[type="checkbox"][name="feature"]').prop('checked', false);
+    //   // 현재 체크박스만 선택 상태로 설정
+    //   $(this).prop('checked', true);
+    // }
+  // });
+    $('#next').click(function(e) { // 'e' 파라미터 추가
+        // 선택된 체크박스의 개수 계산
+        var checkedCount = $('input[type="checkbox"]:checked').length;
+        
+        // 선택된 체크박스가 없을 경우
+        if(checkedCount < 1 ) {
+            e.preventDefault(); // 이벤트 전파 중단
+            alert('옵션을 최소 1개 이상 선택하세요.'); // 경고 메시지 표시
+        } else if (checkedCount > 2){
+          e.preventDefault(); // 이벤트 전파 중단
+            alert('옵션을 2개 이하로 선택하세요.'); // 경고 메시지 표시
+        }
+        else {
+            // 최소 1개의 옵션이 선택되었다면, 선택된 옵션 수집
+            var selectedfeatures = $('input[name="feature"]:checked').map(function() {
+                return this.value;
+            }).get();
+    
+    
+            // AJAX 호출
+            $.ajax({
+                url: '/feature',
+                type: 'POST',
+                data: {feature: selectedfeatures},
+                success: function(response) {
+                    // 서버로부터 응답이 성공적으로 오면, form6.ejs로 페이지 이동
+                    window.location.href = 'form5.ejs';
+                },
+                error: function(xhr, status, error) {
+                    // 오류 처리
+                    alert("에러 발생: " + error);
+                }
+            });
+        }
+    });
+});
+document.getElementById('previous').addEventListener('click', function() {
+  window.history.back();
+});
+
+  // document.querySelector('#previous').addEventListener('click', function() {
+  //   // 여기에 설문조사 화면으로 이동하는 코드를 작성하세요.
+  //   window.location.href = 'form3.ejs'; // 'your-survey-page.ejs'를 설문조사 페이지의 URL로 교체하세요.
+  // });
+  // document.querySelector('#weight').addEventListener('click', function() {
+  //   // 여기에 설문조사 화면으로 이동하는 코드를 작성하세요.
+  //   window.location.href = 'form1.ejs'; // 'your-survey-page.ejs'를 설문조사 페이지의 URL로 교체하세요.
+  // });
+  // document.querySelector('#purpose').addEventListener('click', function() {
+  //   // 여기에 설문조사 화면으로 이동하는 코드를 작성하세요.
+  //   window.location.href = 'form2.ejs'; // 'your-survey-page.ejs'를 설문조사 페이지의 URL로 교체하세요.
+  // });
+  // document.querySelector('#game').addEventListener('click', function() {
+  //   // 여기에 설문조사 화면으로 이동하는 코드를 작성하세요.
+  //   window.location.href = 'form3.ejs'; // 'your-survey-page.ejs'를 설문조사 페이지의 URL로 교체하세요.
+  // });
+  // document.querySelector('#OS').addEventListener('click', function() {
+  //   // 여기에 설문조사 화면으로 이동하는 코드를 작성하세요.
+  //   window.location.href = 'form5.ejs'; // 'your-survey-page.ejs'를 설문조사 페이지의 URL로 교체하세요.
+  // });
+  // document.querySelector('#size').addEventListener('click', function() {
+  //   // 여기에 설문조사 화면으로 이동하는 코드를 작성하세요.
+  //   window.location.href = 'form6.ejs'; // 'your-survey-page.ejs'를 설문조사 페이지의 URL로 교체하세요.
+  // });
+  // document.querySelector('#price').addEventListener('click', function() {
+  //   // 여기에 설문조사 화면으로 이동하는 코드를 작성하세요.
+  //   window.location.href = 'form7.ejs'; // 'your-survey-page.ejs'를 설문조사 페이지의 URL로 교체하세요.
+  // });
+  </script>
+
+</body>
+</html>
